@@ -1,0 +1,13 @@
+1.
+	(a)
+		PTE size = 33-12+10 = 31 bits = 4 bytes
+		page size = 2^12B
+		No. of PTEs per page = 2^(12-2) = 2^10
+		inner page table will be spread over 2^(32-12-10) pages = 2^10 pages
+		size of inner page table = (2^10)*2 bytes = 2KB = 1 page = 4KB
+		Total memory required for page tables of a process = (2^10)*4KB + 4KB = 4MB + 4KB
+	(b)
+		PTE size = 32-12+10 = 4bytes
+		inverted page table size = 2^(33-12)*4bytes = 8MB
+
+2.

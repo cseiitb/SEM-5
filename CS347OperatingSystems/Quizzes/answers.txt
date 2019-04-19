@@ -1,0 +1,107 @@
+Quiz 1:
+	1.	B
+	2.	Monolithic kernel
+	3.	True
+	4.	False
+	5.	C
+	6.	True
+	7.	Voluntary context switch
+	8.	False
+	9.	False
+	10.	False
+	11.	True
+	12.	False
+	13.	True
+	14.	C
+	15.	init
+
+Quiz 2:
+	1.	0
+	2.	0
+	3.	D
+	4.	C
+	5.	Ready
+	6.	C
+	7.	On the condition that they all share common data of the parent process
+	8.	C
+	9.	Yes
+	10.	Yes
+	11.	kernel thread
+	12.	Yes
+	13.	No
+	14.	No
+	15.	P2
+
+Quiz 3:
+	1.
+		A.	Kernel
+		B.	CPU
+		C.	CPU
+		D.	CPU
+		E.	Kernel
+	2.
+		A.	No
+		B.	Yes
+		C.	No
+		D.	Yes
+		E.	Yes
+		F.	No
+		G.	No
+		H.	Yes
+	3.
+		A.	address 0
+		B.	logical address 0
+
+Quiz 4:
+	1.
+		Initialization: s1 = Semaphore(1), s2 = Semaphore(0) and s3 = Semaphore(0)
+
+		thrA:
+			while(1)
+			{
+				s1.down();
+				fa1();
+				s3.up();
+				s2.down();
+				fa2();
+				s1.up();
+			}
+		thrB:
+			while(1)
+			{
+				s3.down();
+				fb();
+				s2.up();
+			}
+	2.
+		writer_arriving=0;
+		reader = 0;
+		writer_present = false;
+		Read lock:
+			lock(mutex);
+			while((writer_arriving!=0)||(writer_present))
+				wait(reader_can_enter);
+			reader++;
+			unlock(mutex);
+		Read unlock:
+			lock(mutex);
+			reader--;
+			if(reader == 0)
+				signal(writer_can_enter);
+			unlock(mutex);
+		Write lock:
+			lock(mutex);
+			writer_arriving++;
+			while((reader != 0)||(writer_present))
+				wait(writer_can_enter);
+			writer_present = true;
+			unlock(mutex);
+		Write unlock:
+			lock(mutex);
+			writer_present = false;
+			signal(writer_can_enter);
+			signal(reader_can_enter);
+			unlock(mutex);
+
+Quiz 5:
+	1.

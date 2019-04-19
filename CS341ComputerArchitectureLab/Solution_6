@@ -1,0 +1,98 @@
+Total Marks for lab:  19.
+
+
+Q.1 
+total 1 mark : 1/2 mark for correct stage and 1/2 mark for explanation
+
+Q.2 to Q.9(except 3 and 4) 3 marks for each question
+
+1 mark for instructions they added
+1 mark for comment
+1 mark for .png
+special case:
+Q.6 and Q.9 look for their explanation and code give marks out of 3. No need of screen-shot for these two questions.
+
+Solutions :
+
+Soln 1 : 
+
+Stage = "ID"(instruction decode) 
+explanation: stalls before ID stage describes that it is waiting for input. 
+
+Soln.2 :
+
+Result of current instruction is used in its following instruction 
+
+e.g. When load is followed with add, store etc where the output of load is used as input in the following instruction will cause a stall. There may be other examples as well 
+
+e.g. 
+lw r1, 0(r3)
+add r2, r1, r1
+
+Soln.5 :
+
+Output register of an instruction*(with output ready in the EX stage such
+as add)* is required in the next instruction
+
+e.g.
+addi r1, r0, 0
+beqz r1, end
+
+*Soln 6:*
+
+*Forwarding from MEM stage to ID stage is not possible.*
+*MEM WB*
+*IF       ID*
+*Reason : Rather than forwarding, simple read happens in the ID stage. This
+is because write happens in the first half of the cycle followed by read in
+the second half of the cycle. Hence the architecture doesn't require extra
+data and control path for forwarding.*
+
+*In the below mentioned eg. , lw instruction writes the value into r1 in
+the WB stage and beq instruction reads the value from register r1 in the ID
+stage. No forwarding takes place.*
+
+
+*lw r1, 4(r0)beq r2, r1*
+
+
+*Soln 7:*
+
+Take two consecutive div operations.
+
+e.g.
+div r1, r2, r3
+div r4, r5, r1
+
+*Alternate solution : Since mult and div open up a lot of possibilities,
+some of us asked the students to avoid them in the this and the next
+question. Avoiding these instructions, the maximum stall we can get is 2.*
+*eg. *
+
+*lw r1, 4(r0)beq r2, r1*
+
+
+*Soln 8:*
+
+Put several instructions with arbitrary registers in between two data
+dependent instructions
+
+e.g.
+div r3, r1, r2
+followed by several instructions with arbitrary registers and then
+add r4, r3, r1
+
+*Alternate solution : (Avoiding mult and div) The maximum distance is 1*
+*addi r1 r1 0*
+*nop*
+*beq r1*
+
+
+Soln 9:
+
+div r3, r1, r2
+add r3, r1, r2
+*addi r3 r3 0*
+But this is not happening in the simulator.
+
+
